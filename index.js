@@ -1,5 +1,14 @@
 var types = require("HAP-NodeJS/accessories/types.js");
 var request = require("request");
+var Service, Characteristic, Accessory;;
+
+module.exports = function(homebridge) {
+  Service = homebridge.hap.Service;
+  Characteristic = homebridge.hap.Characteristic;
+  Accessory = homebridge.hap.Accessory;
+
+  homebridge.registerAccessory("homebridge-particle", "Particle", ParticleAccessory);
+}
 
 function ParticleAccessory(log, config) {
   this.log = log;
@@ -27,7 +36,7 @@ ParticleAccessory.prototype = {
   },
 
   deviceUrl: function(platform_url, device_id) {
-    return platform_url+'/devices/'+device_id;
+    return platform_url + '/devices/' + device_id;
   },
 
   functionUrl: function(name, device_url) {
